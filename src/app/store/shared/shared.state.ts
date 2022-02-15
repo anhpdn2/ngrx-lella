@@ -5,5 +5,5 @@ export interface SharedState {
 
 export const initialState = {
   showLoading: false,
-  errorMessage: 'string'
+  errorMessage: ''
 }
