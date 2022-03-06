@@ -12,6 +12,7 @@
         <th>Description</th>
         <th>Action</th>
         <th></th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -21,6 +22,7 @@
           <td>{{post.description}}</td>
           <td><a href="" class="btn btn-primary" [routerLink]="['edit', post.id]">Update</a></td>
           <td><a class="btn btn-danger" (click)="onDelete(post.id)">Delete</a></td>
+          <td><a class="btn btn-info" [routerLink]="['details', post.id]">Detail</a></td>
         </tr>
       </tbody>
     </table>

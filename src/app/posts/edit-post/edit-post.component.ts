@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppState} from "../../store/app.state";
 import {Store} from "@ngrx/store";
-import { getPostById } from '../state/posts.selector';
-import { Post } from 'src/app/models/posts.model';
-import { FormGroup, Validators} from '@angular/forms';
-import {FormControl} from "@angular/forms";
+import {getPostById} from '../state/posts.selector';
+import {Post} from 'src/app/models/posts.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {updatePost} from "../state/posts.action";
 import {Subscription} from "rxjs";
 
@@ -23,17 +22,31 @@ export class EditPostComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.createForm();
+    this.postSubscription = this.store.select(getPostById).subscribe((post) => {
+      console.log(post);
+      if (post) {
+        this.post = post;
+
+        this.postForm.patchValue({
+          title: post.title,
+          description: post.description
+
+        })
+      }
+    })
+    /*this.route.paramMap.subscribe(params => {
       console.log(params);
       const id = params.get('id');
       this.postSubscription = this.store.select(getPostById, {id}).subscribe(data => {
         this.post = data;
         this.createForm();
       });
-    });
+    });*/
   }
 
   createForm(): void {

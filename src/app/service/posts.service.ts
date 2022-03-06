@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {map, Observable} from "rxjs";
+import {map, Observable, of} from "rxjs";
 import {Post} from "../models/posts.model";
 
 @Injectable({
@@ -31,11 +31,11 @@ export class PostsService {
   }
 
   updatePost(post: Post) {
-    if (!post.id) {
-      return;
-    }
+    /*if (!post.id) {
+      return of(null);
+    }*/
     const postData = {
-      [post.id]: { title: post.title, description: post.description },
+      [post.id ? post.id : this.randomId()]: { title: post.title, description: post.description },
     };
     return this.http.patch(
       `https://vue-completecourse.firebaseio.com/posts.json`,
@@ -53,5 +53,10 @@ export class PostsService {
     return this.http.get<Post>(
       `https://vue-completecourse.firebaseio.com/posts/${id}.json`
     );
+  }
+
+  randomId() {
+    return Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
   }
 }

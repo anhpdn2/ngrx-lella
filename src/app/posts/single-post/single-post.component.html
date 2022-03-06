@@ -1,0 +1,8 @@
+<p>Detail Post:</p>
+<div *ngIf="post | async as postData">
+
+  <p>{{postData.id}}</p>
+  <p>{{postData.title}}</p>
+  <p>{{postData.description}}</p>
+</div>
+<div><a [routerLink]="['/posts']">Back to posts</a></div>
