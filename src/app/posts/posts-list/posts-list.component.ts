@@ -21,6 +21,9 @@ export class PostsListComponent implements OnInit {
   ngOnInit(): void {
     this.posts = this.store.select(getPosts);
     this.store.dispatch(loadPosts());
+    this.store.select(getPosts).subscribe((posts) => {
+      console.log(posts);
+    });
   }
 
   onDelete(postId: any) {
