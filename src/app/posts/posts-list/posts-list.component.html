@@ -1,6 +1,6 @@
 <div class="row my-4">
   <div class="col-md-8 ml-4">
-    <h3>Posts List</h3>
+    <h3>Posts List({{countPost | async}})</h3>
     <div class="mb-3">
       <a href="#" class="btn btn-primary" [routerLink]="['/posts/add']">Add Post</a>
     </div>
@@ -16,8 +16,8 @@
       <tbody>
         <tr *ngFor="let post of postsData">
           <td>{{post.id}}</td>
-          <td>{{post.title}}</td>
-          <td>{{post.description}}</td>
+          <td style="word-break: break-all">{{post.title}}</td>
+          <td style="word-break: break-all">{{post.description}}</td>
           <td>
             <a href="" class="btn btn-primary" [routerLink]="['edit', post.id]">Update</a>
             <a class="btn btn-danger" (click)="onDelete(post.id)">Delete</a>

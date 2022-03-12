@@ -16,3 +16,5 @@ export const getPostsEntities = createSelector(getPostsSate, postsSelector.selec
 export const getPostById = createSelector(getPostsEntities, getCurrentRoute, (posts: any, route: RouterStateUrl) => {
   return posts ? posts[route.params['id']] : null;
 });
+
+export const getCountPosts = createSelector(getPostsSate, (state) => state.count);
